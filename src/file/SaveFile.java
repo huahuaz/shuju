@@ -16,7 +16,7 @@ import java.util.List;
  * 保存文件
  */
 public class SaveFile {
-    private void save() throws SQLException {
+    public void save() throws SQLException {
         StudentDao studentDao =new StudentDaoImp();
         //ArrayList<Student> list = s.selectAllStudent();
         List<Student> list  = studentDao.selectAllStudent();

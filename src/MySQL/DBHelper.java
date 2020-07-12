@@ -153,10 +153,10 @@ public class DBHelper {
         try {
             // 每次都会通过open方法获取连接
             conn = openConnection();
-            System.out.println("SQL: " + sql);
+            //System.out.println("SQL: " + sql);
             PreparedStatement ps = conn.prepareStatement(sql);
             // alrt + /
-            System.out.println("参数: " + Arrays.toString(params));
+            //System.out.println("参数: " + Arrays.toString(params));
             for (int i = 0; i < params.length; i++) {
                 ps.setObject(i + 1, params[i]);
             }

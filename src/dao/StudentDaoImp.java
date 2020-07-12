@@ -130,7 +130,7 @@ public class StudentDaoImp implements StudentDao {
     public int deleteStudent(String uid) {
         String sql = "delete from db_student where sid = ?";
         dbHelper.update(sql, uid);
-        System.out.println("删除成功");
+        System.out.println("删除成功!");
 
         return 1;
     }

@@ -3,6 +3,7 @@ import dao.ListSort;
 import dao.StudentDao;
 import dao.StudentDaoImp;
 import file.ReadFile;
+import file.SaveFile;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -13,23 +14,26 @@ public class Main {
     public static Scanner scanner = new Scanner(System.in);
     public static StudentDao sd = new StudentDaoImp();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         start();
     }
 
     public static void menu() {
-        System.out.println("1.²éÑ¯Ñ§ÉúĞÅÏ¢");
-        System.out.println("2.Ìí¼ÓÑ§ÉúĞÅÏ¢");
-        System.out.println("3.ĞŞ¸ÄÑ§ÉúĞÅÏ¢");
-        System.out.println("4.É¾³ıÑ§ÉúĞÅÏ¢");
-        System.out.println("5.¶ÁÈ¡ĞÅÏ¢ÎÄ¼ş");
+        System.out.println("*******æ¬¢è¿è¿›å…¥å­¦ç”Ÿæˆç»©ç®¡ç†ç¨‹åº*******");
+        System.out.println("     ----1.æŸ¥è¯¢å­¦ç”Ÿä¿¡æ¯----");
+        System.out.println("     ----2.æ·»åŠ å­¦ç”Ÿä¿¡æ¯----");
+        System.out.println("     ----3.ä¿®æ”¹å­¦ç”Ÿä¿¡æ¯----");
+        System.out.println("     ----4.åˆ é™¤å­¦ç”Ÿä¿¡æ¯----");
+        System.out.println("     ----5.ä¿å­˜å­¦ç”Ÿä¿¡æ¯----");
+        System.out.println("     ----6.è¯»å–ä¿¡æ¯æ–‡ä»¶----");
+        System.out.println("     ----7.  é€€å‡ºç¨‹åº ----");
     }
 
-    public static void start() {
+    public static void start() throws SQLException {
 
         while (true) {
             menu();
-            System.out.println("ÇëÊäÈëÄúÒª½øĞĞµÄ²Ù×÷µÄĞòºÅ");
+            System.out.println("è¯·è¾“å…¥æ‚¨è¦è¿›è¡Œçš„æ“ä½œçš„åºå·:");
 
             int num = scanner.nextInt();
             switch (num) {
@@ -46,10 +50,17 @@ public class Main {
                     deleteStudent();
                     break;
                 case 5:
+                    saveStudent();
+                    break;
+                case 6:
                     readStudent();
                     break;
+                case 7:
+                    System.out.println("ç¨‹åºæ­£å¸¸é€€å‡º!");
+                    System.exit(0);
+                    break;
                 default:
-                    System.out.println("ÊäÈë´íÎóÇëÖØĞÂÊäÈë");
+                    System.out.println("è¾“å…¥é”™è¯¯è¯·é‡æ–°è¾“å…¥!");
                     break;
             }
         }
@@ -62,18 +73,18 @@ public class Main {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        System.out.println("ÄãÒªÑ¡ÓÃÄÄÖÖ²éÑ¯·½Ê½£º");
-        System.out.println("1.ÕûÌå²éÑ¯");
-        System.out.println("2.·ÖÒ³²éÑ¯");
-        System.out.println("3.Ñ§ºÅ²éÑ¯");
-        System.out.println("4.ĞÕÃû²éÑ¯");
+        System.out.println("ä½ è¦é€‰ç”¨å“ªç§æŸ¥è¯¢æ–¹å¼:");
+        System.out.println("1.æ•´ä½“æŸ¥è¯¢(æŒ‰ç…§æˆç»©é™åº)");
+        System.out.println("2.åˆ†é¡µæŸ¥è¯¢(æŒ‰ç…§å­¦å·æ’åº)");
+        System.out.println("3.å­¦å·æŸ¥è¯¢");
+        System.out.println("4.å§“åæŸ¥è¯¢");
         int num = scanner.nextInt();
         switch (num) {
             case 1:
                 ArrayList<Student> list = null;
                 try {
                     list = sd.selectAllStudent();
-                    System.out.println("ĞÕÃû   Ñ§ºÅ  Ó¢Óï  ÀúÊ·   ¸ßÊı   ÌåÓı  Êı¾İ½á¹¹ ×Ü·Ö");
+                    System.out.println("å§“å   å­¦å·  è‹±è¯­  å†å²   é«˜æ•°   ä½“è‚²  æ•°æ®ç»“æ„ æ€»åˆ†");
                     l.setUpObjects();
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
@@ -83,12 +94,12 @@ public class Main {
                 }
                 break;
             case 2:
-                System.out.println("ÇëÊäÈëÒª·ÖµÄÒ³Êı£¨ÀıÈç£º1-5£©£º");
+                System.out.println("è¯·è¾“å…¥ç´¢å¼•å·,ä¸€é¡µä¸­æŸ¥è¯¢å­¦ç”Ÿä¸ªæ•°(é»˜è®¤ç¬¬ä¸€ä¸ªå­¦ç”Ÿç´¢å¼•å·ä¸º0ï¼Œä»¥æ­¤ç±»æ¨):");
                 int choose1 = scanner.nextInt();
                 int choose2 = scanner.nextInt();
                 try {
                     ArrayList<Student> list1 = sd.pagingQuery(choose1, choose2);
-                    System.out.println("ĞÕÃû   Ñ§ºÅ  Ó¢Óï  ÀúÊ·   ¸ßÊı   ÌåÓı  Êı¾İ½á¹¹ ×Ü·Ö");
+                    System.out.println("å§“å   å­¦å·  è‹±è¯­  å†å²   é«˜æ•°   ä½“è‚²  æ•°æ®ç»“æ„ æ€»åˆ†");
                     for (int i = 0; i < list1.size(); i++) {
                         System.out.println(list1.get(i));
                     }
@@ -97,11 +108,11 @@ public class Main {
                 }
                 break;
             case 3:
-                System.out.println("ÇëÊäÈëÄãÒª²éÑ¯µÄÑ§ºÅ£º");
+                System.out.println("è¯·è¾“å…¥ä½ è¦æŸ¥è¯¢çš„å­¦å·:");
                 String sid = new Scanner(System.in).nextLine();
                 try {
                     ArrayList<Student> list2 = sd.selectStuBySid(sid);
-                    System.out.println("ĞÕÃû   Ñ§ºÅ  Ó¢Óï  ÀúÊ·   ¸ßÊı   ÌåÓı  Êı¾İ½á¹¹ ×Ü·Ö");
+                    System.out.println("å§“å   å­¦å·  è‹±è¯­  å†å²   é«˜æ•°   ä½“è‚²  æ•°æ®ç»“æ„ æ€»åˆ†");
                     for (int i = 0; i < list2.size(); i++) {
                         System.out.println(list2.get(i));
                     }
@@ -110,13 +121,23 @@ public class Main {
                 }
                 break;
             case 4:
-                System.out.println("ÇëÊäÈëÄãÒª²éÑ¯µÄÑ§ÉúĞÕÃû£º");
+                System.out.println("è¯·è¾“å…¥ä½ è¦æŸ¥è¯¢çš„å­¦ç”Ÿå§“å:");
                 String sname = new Scanner(System.in).nextLine();
                 l.findStudent(sname);
                 break;
             default:
-                System.out.println("ÊäÈë´íÎóÇëÖØĞÂÊäÈë");
+                System.out.println("è¾“å…¥é”™è¯¯è¯·é‡æ–°è¾“å…¥!");
                 break;
+        }
+    }
+
+    private static void saveStudent(){
+        SaveFile saveFile = new SaveFile();
+        try {
+            saveFile.save();
+            System.out.println("æ•°æ®ä¿å­˜æˆåŠŸ!");
+        }catch (SQLException e){
+            System.out.println("æ•°æ®ä¿å­˜å¤±è´¥!");
         }
     }
 
@@ -124,27 +145,28 @@ public class Main {
         ReadFile readFile = new ReadFile();
         try {
             readFile.insert2("b.txt");
+            System.out.println("æ–‡ä»¶è¯»å–æˆåŠŸ!");
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("æ–‡ä»¶è¯»å–å¤±è´¥!");
         }
     }
 
     private static void deleteStudent() {
-        System.out.println("ÇëÊäÈëÄãÒªÉ¾³ıµÄÑ§ÉúÑ§ºÅ");
+        System.out.println("è¯·è¾“å…¥ä½ è¦åˆ é™¤çš„å­¦ç”Ÿå­¦å·:");
         String sid = new Scanner(System.in).nextLine();
         sd.deleteStudent(sid);
     }
 
     public static void updateStudent() {
-        System.out.println("ÇëÊäÈëÄãÒªĞŞ¸ÄµÄÑ§ÉúÑ§ºÅ£º");
+        System.out.println("è¯·è¾“å…¥ä½ è¦ä¿®æ”¹çš„å­¦ç”Ÿå­¦å·:");
         String sid = new Scanner(System.in).nextLine();
 
-        System.out.println("ÇëÊäÈëÄãÒªĞŞ¸ÄµÄ¿ÆÄ¿ĞòºÅ£º");
-        System.out.println("1.Ó¢Óï");
-        System.out.println("2.ÀúÊ·");
-        System.out.println("3.ÊıÑ§");
-        System.out.println("4.ÌåÓı");
-        System.out.println("5.Êı¾İ½á¹¹");
+        System.out.println("è¯·è¾“å…¥ä½ è¦ä¿®æ”¹çš„ç§‘ç›®åºå·:");
+        System.out.println("1.è‹±è¯­");
+        System.out.println("2.å†å²");
+        System.out.println("3.æ•°å­¦");
+        System.out.println("4.ä½“è‚²");
+        System.out.println("5.æ•°æ®ç»“æ„");
         int num = scanner.nextInt();
         String property;
         switch (num) {
@@ -167,20 +189,20 @@ public class Main {
                 throw new IllegalStateException("Unexpected value: " + num);
         }
 
-        System.out.println("ÇëÊäÈëÄãÒªĞŞ¸ÄµÄ·ÖÊı£º");
+        System.out.println("è¯·è¾“å…¥ä½ è¦ä¿®æ”¹çš„åˆ†æ•°:");
         double score = scanner.nextDouble();
         sd.updateStudent(sid, property, score);
-        System.out.println("ĞŞ¸Ä³É¹¦");
+        System.out.println("ä¿®æ”¹æˆåŠŸ!");
     }
 
     public static void addStudent() {
-        System.out.println("ÇëÊäÈëÄúÒªÌí¼ÓµÄÑ§ÉúĞÕÃû");
+        System.out.println("è¯·è¾“å…¥æ‚¨è¦æ·»åŠ çš„å­¦ç”Ÿå§“å:");
         String name = new Scanner(System.in).nextLine();
 
-        System.out.println("ÇëÊäÈëÄúÒªÌí¼ÓµÄÑ§ÉúÑ§ºÅ");
+        System.out.println("è¯·è¾“å…¥æ‚¨è¦æ·»åŠ çš„å­¦ç”Ÿå­¦å·:");
         String sid = new Scanner(System.in).nextLine();
 
-        System.out.println("ÇëÊäÈëÄúÒªÌí¼ÓµÄÑ§Éú³É¼¨£¨ÒÀ´ÎÎª£ºÓ¢Óï£¬ÀúÊ·£¬ÊıÑ§£¬ÌåÓı£¬Êı¾İ½á¹¹£©£º");
+        System.out.println("è¯·è¾“å…¥æ‚¨è¦æ·»åŠ çš„å­¦ç”Ÿæˆç»©ï¼ˆä¾æ¬¡ä¸ºï¼šè‹±è¯­ï¼Œå†å²ï¼Œæ•°å­¦ï¼Œä½“è‚²ï¼Œæ•°æ®ç»“æ„ï¼‰:");
         int english = scanner.nextInt();
         int history = scanner.nextInt();
         int math = scanner.nextInt();
